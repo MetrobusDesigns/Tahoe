@@ -62,10 +62,15 @@ section {
   background-color: #446f9c;
   color: #fff;
   border-radius: 4px;
-  transition: background-color 0.9s ease;
+  transition: background-color 0.2s ease;
 }
 .navbar li a:hover {
   background-color: #72a8e2;
+ 
+}
+
+.navbar li a:active {
+  background-color: #142230;
   box-shadow: 0 0 5px 3px rgba(90, 140, 191, 0.2);
 }
 header,
