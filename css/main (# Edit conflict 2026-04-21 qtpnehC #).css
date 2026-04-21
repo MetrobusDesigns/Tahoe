@@ -20,6 +20,8 @@ body {
 img {
   max-width: 100%;
   vertical-align: bottom;
+  max-width: 10vw;
+  max-height: 100vh;
 }
 
 a {
@@ -75,9 +77,8 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(20px, 7.5vw, 150px);
-
-  /* a lower bound, an upper bound, and a flexible value in between */
+  font-size: 50px;
+  color: gradient(white, #b9daed);
 }
 /*makeing the text change over the hover */
 h1:hover {
