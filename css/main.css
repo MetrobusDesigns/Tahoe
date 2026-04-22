@@ -1,3 +1,41 @@
+/* the greatest grandaddy of them all */
+:root {
+  --primary-bg-color: #2fb3fe;
+  --secondary-bg-color: #97d0f2;
+  --tertiary-bg-color: #000;
+  --primary-font: "Open Sans", sans-serif;
+  --secondary-font: "Alfa Slab One", serif;
+  --primary-spacing: 20px;
+  --white: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-bg-color: magenta;
+    --white: #818589;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-shadow:
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      2px 2px 0 #000;
+  }
+
+  nav a {
+    text-decoration-color: var(--primary-bg-color);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -5,16 +43,25 @@ html {
 }
 
 body {
-  background-color: #555;
-  background-image:
-    linear-gradient(45deg, transparent, #2fb3fe),
-    url("../img/fun-year-round.jpg");
-  background-position: center;
-  background-size: cover;
+  background:
+    linear-gradient(45deg, transparent, var(--primary-bg-color)),
+    url("../img/fun-year-round.jpg") center / cover;
   background-attachment: fixed;
-  margin: 20px;
-  font-family: "Open Sans", sans-serif;
+  margin: var(--primary-spacing);
+  font-family: var(--primary-font);
   line-height: 1.75;
+}
+
+p::first-letter {
+  text-transform: uppercase;
+  font-family: monospace;
+  font-size: 1.5em;
+}
+
+header h1::after {
+  content: '\a "We Promise Jason Isn\'t Here"';
+  white-space: pre-wrap;
+  font-size: 40px;
 }
 
 img {
@@ -23,18 +70,14 @@ img {
 }
 
 a {
-  color: #2985d1;
-  text-decoration: none;
+  color: var(--primary-bg-color);
 }
 
-a:hover {
-  color: red;
-}
-/* NAV BAR */
+/*  NAV  */
 
 nav {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--primary-spacing);
 }
 
 nav img {
@@ -52,13 +95,13 @@ nav ul a {
   color: #fff;
   font-weight: 800;
   text-transform: uppercase;
-  padding: 8px;
+  padding: calc(var(--primary-spacing) / 2);
   display: inline-block;
 }
 
 nav ul a:hover,
 nav ul a:focus {
-  color: #97d0f2;
+  color: var(--secondary-bg-color);
 }
 
 nav ul li {
@@ -69,25 +112,27 @@ nav ul li {
 h1,
 h2,
 h3 {
-  font-family: "Alfa Slab One", serif;
+  font-family: var(--secondary-font);
   font-weight: normal;
   line-height: 1.2;
 }
 
 h1 {
-  font-size: clamp(20px, 7.5vw, 150px);
-
-  /* a lower bound, an upper bound, and a flexible value in between */
+  /* clamp(lowest size, ideal size, largest size) */
+  /* vw ---> view width */
+  /* vh ---> view height */
+  font-size: clamp(90px, 7.5vw, 100px);
 }
-/*makeing the text change over the hover */
+
 h1:hover {
-  background: linear-gradient(white, #2fb3fe);
+  background: linear-gradient(var(--white), var(--secondary-bg-color));
   -moz-background-clip: text;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+/* choose the neighboring <p> next to an <h1> */
 h1 + p {
   font-weight: 700;
   font-style: italic;
@@ -101,13 +146,14 @@ h2 {
 
 h3 {
   font-size: 24px;
-  background: #2fb3fe;
-  color: white;
+  background: var(--primary-bg-color);
+  color: var(--white);
   padding: 15px;
   margin-top: 0;
+  border-radius: 0 0 8px 8px;
 }
 
-h3 + p {
+section p:first-of-type {
   font-style: italic;
   font-weight: 700;
   opacity: 0.5;
@@ -115,25 +161,27 @@ h3 + p {
 
 header {
   background: url("../img/masthead-darkened.jpg") center / cover;
-  color: #fff;
+  color: var(--white);
   text-align: center;
   padding: 50px 7% 50px 7%;
-  max-width: 800px;
   box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 h2 {
-  color: #fff;
+  color: var(--white);
   text-align: center;
 }
 
-em {
-  color: red;
-  background-color: black;
+h2::before {
+  content: "Come By and ";
 }
 
 section {
-  background: #fff;
+  background: var(--white);
+  border-radius: 8px;
   padding: 25px;
   margin-bottom: 20px;
 }
@@ -144,7 +192,50 @@ section {
 }
 
 section p {
-  margin: 15px;
+  margin: calc(var(--primary-spacing) / 2);
+}
+
+section a[target="_blank"]::after {
+  content: " »";
+}
+
+section:last-child {
+  border-top: solid pink 30px;
+  position: relative;
+}
+
+section:last-child::before {
+  content: "FAVORITE";
+  font-weight: 800;
+  color: var(--white);
+  position: absolute;
+  top: -30px;
+  left: 8px;
+}
+
+section > a {
+  color: red;
+}
+
+/* the $= means ends with */
+a[href$=".pdf"] {
+  background: url("../img/icon-pdf.png") no-repeat left center / 16px 16px;
+  padding-left: 20px;
+}
+
+/* the ^= means starts with */
+a[href^="http"] {
+  background-image: url("../img/icon-external-link.svg");
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: left center;
+  padding-left: 20px;
+}
+
+/* the *= means contains the word/phrase/pattern anywhere inside */
+a[href*="youtube.com"] {
+  background: url("../img/icon-youtube.svg") no-repeat left center / 16px 16px;
+  padding-left: 20px;
 }
 
 .learn-more-link img {
@@ -159,10 +250,9 @@ section p {
 
 .learn-more-link svg * {
   stroke: currentColor;
-  stroke-width: 1.5;
+  stroke-width: 1.4;
 }
 
-header,
 main,
 footer {
   max-width: 800px;
@@ -171,7 +261,7 @@ footer {
 }
 
 footer {
-  color: #fff;
+  color: var(--white);
   text-align: center;
   font-weight: 300;
 }
@@ -180,7 +270,7 @@ footer {
   body {
     padding-top: 100px;
   }
-  /*I like this one!*/
+
   nav {
     position: fixed;
     top: 0;
@@ -188,10 +278,25 @@ footer {
     right: 0;
     /*   z-index allows us to control whether it's on top or behind something   */
     z-index: 100;
-    background: black;
+    background: var(--tertiary-bg-color);
     display: flex;
     justify-content: space-between;
     padding: 20px;
     align-items: center;
+  }
+}
+
+@media (min-width: 1100px) {
+  main {
+    max-width: 1400px;
+    display: flex;
+    gap: 30px;
+    padding: 0 30px;
+    margin: auto;
+    align-items: flex-start;
+  }
+
+  section {
+    width: 33.3%;
   }
 }
